@@ -1,0 +1,63 @@
+from pew.pew import shell
+
+
+# Python program for implementation of Shell Sort
+ 
+def shellSort(arr):
+ 
+    # Start with a big gap, then reduce the gap
+    N = len(arr)
+    
+    #Sets parameters for H or increment sequence
+    hArr = [3, 1]
+    
+    shellComp = 0
+    insertComp = 0
+    
+    #runs elements for lenght of hArr   
+    for h in hArr:    
+        #Compares elements to the end of the array
+        for i in range(0, N-h):
+            j = i+h
+            numSwaps = 0    
+            if arr[i] > arr[j]: 
+                #Swap the elements if the 
+                arr[i], arr[j] = arr[j], arr[i]
+                print (arr)
+                
+                     
+            #increments number of shellsort comparisions or insertions sort comparision
+            if h  == 1: 
+                insertComp += 1
+            else:
+                shellComp += 1
+                
+    #print("\nNumber of comparision for shell sort comparisons: ",shellComp)    
+    #print("Number of comparision for insertion sort comparisons: ", insertComp)
+ 
+ 
+def insertionSort(arr):
+    numExc = 0
+    swap  = 1
+    
+    while numExc != swap
+    for i in range(0, len(arr)-1):
+        j = i+1
+        if arr[i] > arr[j]: 
+        #Swap the elements if the 
+            arr[i], arr[j] = arr[j], arr[i]
+        #print (arr)
+                
+        
+# Driver code to test above
+arr = [10, 3, 5, 1, 7, 3, 6, 2, 8]
+
+print ("Array before sorting:")
+print(arr) 
+
+shellSort(arr)
+ 
+print ("\nArray after sorting:")
+print(arr)
+ 
+# This code is contributed by Mohit Kumra

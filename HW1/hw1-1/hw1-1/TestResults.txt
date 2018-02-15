@@ -1,0 +1,15 @@
+
+['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
+['192', '348', '377', '692', '746', '748', '751', '765', '8int.txt', 36, 8, 28]
+
+['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
+
+
+['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
+['192', '348', '377', '692', '746', '748', '751', '765', '8int.txt', 36, 8, 28]
+
+['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
+['8int.txt', 36, 8, 28]
+
+['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
+['32int.txt', 709, 213, 496]

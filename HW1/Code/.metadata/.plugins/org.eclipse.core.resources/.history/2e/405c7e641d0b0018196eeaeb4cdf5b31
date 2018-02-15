@@ -1,0 +1,155 @@
+import time
+
+files = []
+arr = []
+data = []
+pList = []
+qList = []
+idList= []
+rootSize = []
+algorTime = []
+arrN = []
+N = 0
+weighted = 'n'
+
+def genIndList():
+    global idList
+    global rootSize
+
+    for i in range(0, 8191):
+        idList.append(i)
+        rootSize.append(1)
+    return idList 
+        
+
+#Used to open the file dialog box.  Copied from:
+#https://stackoverflow.com/questions/9319317/quick-and-easy-file-dialog-in-python/14119223
+def getFileList():
+    import tkinter as tk
+    import os
+    global files
+    global filepath2
+    from tkinter import filedialog
+    files = []
+    root = tk.Tk()
+    root.withdraw()
+    
+    filePath = filedialog.askopenfilename()
+    #filePath2 = filedialog.askopenfilename()
+    
+    path = os.path.dirname(filePath)
+    #print(path)
+    
+    for file in os.listdir(path):
+        fNew =  os.path.join(path, file)
+            #https://stackoverflow.com/questions/3277503/how-do-i-read-a-file-line-by-line-into-a-list
+        if fNew.endswith(".txt"):
+            files.append(fNew)    
+            #print(fNew)
+    return files
+
+def getDataList(datafile):
+    global pList
+    global qList
+    global N
+    
+    with open(datafile) as f:
+        data1 = f.read().splitlines()
+        #h = data1.split(" ")
+        N = len(data1)
+        arrN.append(N)
+        for i in range(0, N-1):
+            data.append(data1[i].split())
+            
+        #This section of the code is used the break up the data in the P and Q list
+        #Part of the code is derived from
+        #https://snakify.org/lessons/two_dimensional_lists_arrays/
+        for row in data:
+            i = 0
+            for elem in row: 
+                if i > 0:
+                    qList.append(int(elem))
+                else: 
+                    pList.append(int(elem))
+                i = 1
+        #print("P List: ", pList)
+        #print("Q List: ", qList, "\n")
+        return
+    
+
+def root(y):
+    global idList
+    while y != idList[y]:
+        y = idList[y]
+        #print(y)
+    return y
+
+def quickUnion():
+    #print('all done')
+    startAlgor = time.time()
+    #global idList
+    #print("\nUnion pairs for N = ", N,"\n")
+    #print(idList)
+    global pairs
+    pairs = []
+    p = 0 
+    q = 0
+    #afile = open(filePath2, "w" )
+    #afile.write("\nUnion pairs \n")
+ 
+    for i in range(0, N-1):
+        p = pList[i]
+        q = qList[i]
+        
+        if root (p) != root (q):
+            #print("Root:", root (p))
+            union (p, q)                
+
+    #appends current time to the array
+    timeAlgor = 1000*round((time.time() -startAlgor), 2)
+    algorTime.append(timeAlgor)
+
+def union (p, q):
+    #print("\n Union pairs: ")
+    global idList
+    global rootSize
+    rp = root(p)
+    rq = root(q)
+    
+    if rootSize[rp] < rootSize[rq] and weighted == 'w':
+        idList[rq] = rp
+        rootSize[rq] = rootSize[rq] + rootSize[rp] 
+    else:
+        idList[rp] = rq
+        rootSize[rp] = rootSize[rq] + rootSize[rp] 
+    
+    print("Root p: ", rp)
+    print("Root q: ", rq)
+
+def runQuickUnion():
+    getFileList()
+    
+    for x in range(0, len(files)):
+        genIndList()
+        getDataList(files[x])
+        quickUnion()
+        #print(idList)
+
+
+weighted = input("Please indicate the type of Quick Union Alogorithm that you would like to perform. \nType 'N' for standard and 'W' for weighted. \n")
+runQuickUnion()
+
+algorTime = [algorTime for _,algorTime in sorted(zip(arrN,algorTime))]
+arrN.sort()
+
+if weighted == "w":
+    unionType = "Weighted"
+else:
+    unionType = "Non-weighted"
+
+print("Quick Union Type: ", unionType)
+print("\nInput size (N): ", arrN)
+print("Algorithm time(ms):", algorTime)
+#print("idList: ", idList)
+
+input("\n ALL DONE! Press any key to exit. ")

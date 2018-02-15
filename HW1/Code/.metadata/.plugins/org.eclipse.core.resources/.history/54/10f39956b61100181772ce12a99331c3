@@ -1,0 +1,49 @@
+
+
+# Python program for implementation of Shell Sort
+ 
+def shellSort(arr):
+ 
+    # Start with a big gap, then reduce the gap
+    N = len(arr)
+   
+   #Sets parameters for H or increment sequence
+    hArr = [3, 1]
+    
+    colors = ["red", "green", "blue", "purple"]
+    for color in colors:
+        print(color)
+    
+    #runs elements for lenght of hArr   
+    for x in range(0, len(hArr)):
+        h  = hArr[x]
+        
+        for i in range(0, N-(h+1)):
+            j = i+h
+            #print (j)
+            if arr[i] > arr[j]: 
+                #Swap the elements if the 
+                arr[i], arr[j] = arr[j], arr[i]
+           
+                #print (arr)
+            print (i)    
+    
+    shellComp = 0
+    
+   
+ 
+ 
+# Driver code to test above
+arr = [ 12, 34, 54, 2, 3]
+
+print ("Array before sorting:")
+print(arr) 
+
+n = len(arr)
+shellSort(arr)
+
+ 
+print ("\nArray after sorting:")
+print(arr)
+ 
+# This code is contributed by Mohit Kumra

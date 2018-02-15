@@ -1,0 +1,35 @@
+
+filePath = ""
+arr = []
+data = []
+
+#Used to open the file dialog box.  Copied from:
+#https://stackoverflow.com/questions/9319317/quick-and-easy-file-dialog-in-python/14119223
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+    global filePath
+    root = tk.Tk()
+    root.withdraw()
+    filePath = filedialog.askopenfilename()
+    return filePath
+
+getFilePath()
+with open(filePath) as f:
+    data1 = f.read().splitlines()
+    #h = data1.split(" ")
+    N = len(data1)
+    for i in range(0, N-1):
+        data.append(data1[i].split())
+   
+    #https://snakify.org/lessons/two_dimensional_lists_arrays/
+    for row in data:
+        el = []
+        for elem in row: 
+            el.append = int(elem)
+    print(el)
+    
+    print(data)
+    #print(data)
+    print(data1)
+    #print(h)

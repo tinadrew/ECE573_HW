@@ -1,0 +1,82 @@
+"""
+Tina Drew - 035006375
+ECE573 - Spring 2018
+Homework #2
+This Code is to asnwer the Question 1 
+The code runs shell short with increment values of 7, 3, and 1  and 
+outputs the number of comparisons. 
+"""
+import os
+
+class glVar():
+    dataFiles = ''
+    directory = ""
+    shellCompPh = 0
+    insCompPh = 0
+    shellCompTot = 0
+    myFile = ''
+#The code below opens and dialog box and allows the user to select a 
+#directory 
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+
+    root = tk.Tk()
+    root.withdraw()
+    glVar.dataFiles = filedialog.askopenfilenames(parent=root,title='Select files to be tested')
+    glVar.directory = os.path.dirname(glVar.dataFiles[0])
+    
+    file = 'test12.data'
+    glVar.myFile = open(os.path.join(glVar.directory, file), "w+" )
+    
+# Python program for implementation of Shell Sort
+ 
+def shellSort(arr):
+    # Start with a big gap, then reduce the gap
+    N = len(arr)
+    #Sets parameters for H or increments sequence
+    hArr = [7, 3, 1]
+    #runs elements for length of hArr   
+    for h in hArr:    
+        #Compares elements to the end of the array
+        for i in range(0, N-h):
+            j = i+h
+            #numSwaps = 0
+            k = j
+            while k >= h:
+                #swaps elements recursively until we reach the end of the array    
+                if arr[i] > arr[j]: 
+                    #Swap the elements if the 
+                    arr[i], arr[j] = arr[j], arr[i]
+                    #print (arr)
+                k -= h
+                j = i
+                i = k                   
+                                    
+                #increments number of shellsort comparisions or insertions sort comparision
+                if h  == 1: 
+                    glVar.insCompPh += 1
+                else:
+                    glVar.shellCompPh += 1
+                    
+    print("\nNumber of comparision for shell sort comparisons: ", glVar.shellCompPh)    
+    print("Number of comparision for insertion sort comparisons: ", glVar.insCompPh)
+ 
+ 
+
+# Driver code to test above
+arr = [10, 3, 5, 1, 7, 3, 6, 2, 8]
+
+getFilePath()
+
+def runShellSort():
+   
+    shellSort(arr)
+    glVar.myFile.write(str(arr))
+    #glVar.myFile.write(str(glVar.insCompPh))
+
+
+runShellSort()
+    
+    
+

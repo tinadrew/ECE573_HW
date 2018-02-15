@@ -1,0 +1,36 @@
+for x in range(0, 3):
+    print ("Hello World1")
+
+#Used to open the file dialog box.  Copied from:
+#https://stackoverflow.com/questions/9319317/quick-and-easy-file-dialog-in-python/14119223
+import tkinter as tk
+from tkinter import filedialog
+root = tk.Tk()
+root.withdraw()
+fileName = filedialog.askopenfilename()
+
+#https://stackoverflow.com/questions/3277503/how-do-i-read-a-file-line-by-line-into-a-list
+with open(fileName) as f:
+    data = f.read().splitlines()
+    data1 = [int(x) for x in data]
+
+    
+print(data)
+print(data1) 
+
+
+import tkinter as tk
+from tkinter import filedialog
+global data
+global N
+root = tk.Tk()
+root.withdraw()
+fileName = filedialog.askopenfilename()
+
+#http://www.pitt.edu/~naraehan/python2/file_path_cwd.html
+import os
+path = os.path.dirname(fileName)
+print(path)
+
+
+

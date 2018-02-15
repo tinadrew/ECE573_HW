@@ -1,0 +1,94 @@
+#Imports Library to use timing function
+import time
+
+#Sets global variables to default variables
+startProg = time.time()
+timeNaive = 0
+timeProg = 0
+SumCount = 0
+OpCount = 0
+N = 0
+arr = [-10, 10, 1, 0, 20, 10, 25, 5, 30]
+arrN = [] #X axis for inputs
+arrNaive = []
+arrLog = []
+
+
+#Used to open the file dialog box.  Copied from:
+#https://stackoverflow.com/questions/9319317/quick-and-easy-file-dialog-in-python/14119223
+def getFilePath ():
+    import tkinter as tk
+    from tkinter import filedialog
+    global filePath
+    root = tk.Tk()
+    root.withdraw()
+    filePath = filedialog.askopenfilename()
+    return filePath
+    
+#The function below provides a naive implementation 
+#of the three sum problem.  The code is based on 
+#Slide 34 for the fundamentals-1-s18 slides
+
+def ThreeSumNaive(data):
+    startNaive = time.time()
+    global SumCount
+    global OpCount 
+    global timeNaive
+    global timeProg
+    for i in range(0, N-1):
+        for j in range(i+1, N-1):
+            for k in range(j+1, N-1):
+                OpCount = OpCount+1
+                #print(i," ",j," ",k)
+                if data[i] + data[j] +data[k] == 0:
+                    SumCount = SumCount+1
+                    #print(data[i], ", ", data[j],", ", data[k])
+    timeNaive = time.time() - startNaive
+    timeProg  =  time.time() - startProg
+    return SumCount, OpCount, timeNaive, timeProg
+    
+#The function below prints information from the program   
+def printData(data, OpCount, SumCount, timeProg, timeNaive, N):                         
+    print("Length or array: ", N)
+    print("Number of 3 sum pairs =", SumCount)
+    print("Number of operations =", OpCount)
+    print ("Program Time =", timeProg)
+    print ("Algorithm Time =", timeNaive)
+
+
+
+#ThreeSumNaive(data)
+#printData(data, OpCount, SumCount, timeProg, timeNaive, N)
+
+def runThreeSum():
+#Gets data from each file with a .txt extension in the directory
+#http://www.pitt.edu/~naraehan/python2/file_path_cwd.html
+    import os
+    global data
+    global arrN
+    global arrNaive
+    global N
+    
+    path = os.path.dirname(getFilePath())
+    
+    for file in os.listdir(path):
+        fNew =  os.path.join(path, file)
+            #https://stackoverflow.com/questions/3277503/how-do-i-read-a-file-line-by-line-into-a-list
+        if fNew.endswith(".txt"):
+            #print(fNew)
+            with open(fNew) as f:
+                data1 = f.read().splitlines()
+                data = [int(x) for x in data1]
+                N = len(data)
+                #print(data)
+        ThreeSumNaive(data)
+        arrN.append(N)
+        arrNaive.append(timeNaive)
+        
+runThreeSum()
+print(arrN, arrNaive)
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+

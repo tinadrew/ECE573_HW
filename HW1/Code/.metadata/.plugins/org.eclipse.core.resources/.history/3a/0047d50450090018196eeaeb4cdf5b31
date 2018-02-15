@@ -1,0 +1,22 @@
+file1 = open(input (str("Please enter the name of the file you wish to open:" )),"r")
+## Open the file and "r" read it
+02
+        emp = 0
+03
+        y = 0
+04
+        for x in file1:
+05
+            x = x[0:-1] ## Take the whole 1st value.
+06
+            x = float(x)## Convert from string to number
+07
+            x = x + emp ## Add it to the zero
+08
+            y = y + 1.0 ## Add one to the y to account for each value inputed.
+09
+            emp = x ## This will add the old value to the new value
+10
+            convert_float(y)
+11
+        print "Here is the average of the numbers inputed",x / y

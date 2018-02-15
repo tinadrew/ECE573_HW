@@ -1,0 +1,37 @@
+import numpy 
+
+# Code based on code from  https://www.geeksforgeeks.org/shellsort/
+# Python program for implementation of Shell Sort
+ 
+def shellSort(arr):
+ 
+    # Start with a big gap, then reduce the gap
+    n = len(arr)
+   
+    hArr = [3, 1]
+    hInd = 0
+    
+   
+    # Do a gapped insertion sort for this gap size.
+    # The first gap elements a[0..gap-1] are already in gapped 
+    # order keep adding one more element until the entire array
+    # is gap sorted
+    
+    shellComp = 0
+    
+   
+ 
+ 
+# Driver code to test above
+arr = [ 12, 34, 54, 2, 3]
+ 
+n = len(arr)
+shellSort(arr)
+
+print ("Array before sorting:")
+print(arr)
+ 
+print ("\nArray after sorting:")
+print(arr)
+ 
+# This code is contributed by Mohit Kumra

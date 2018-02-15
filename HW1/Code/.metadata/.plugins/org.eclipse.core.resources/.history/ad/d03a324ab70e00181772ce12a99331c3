@@ -1,0 +1,19 @@
+include math
+
+from cgi import log
+N = input("Please enter a value for N: \n")
+
+def getValues(N):
+    y = int(N)
+    x1 = 10*(y)
+    t = math.log10(y)
+    #x2 = 2*y^2
+    print (x1)
+    print (t)
+    #print (x2)
+
+getValues(N)
+#print(int(N)*2)
+
+
+    

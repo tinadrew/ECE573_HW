@@ -1,0 +1,14 @@
+from cgi import log
+N = input("Please enter a value for N: \n")
+
+def getValues(N):
+    x1 = 10*log(int(N))
+    x2 = 2*N^2
+    print (x1)
+    print (x2)
+
+#getValues(N)
+print(int(N)*2)
+
+
+    

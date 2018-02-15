@@ -1,0 +1,24 @@
+import random
+
+class glVar():
+    filePath = ''
+    directory = ""
+
+#The code below opens and dialog box and allows the user to select a 
+#directory 
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+    import os
+
+    root = tk.Tk()
+    root.withdraw()
+    glVar.filePath = filedialog.askopenfilenames(parent=root,title='Select files to be tested')
+       
+    glVar.directory = os.path.dirname(glVar.filePath[0])
+
+#The code below opens or creates a new files. 
+getFilePath()
+file = 'this.txt'
+print(glVar.filePath)
+print(glVar.directory)

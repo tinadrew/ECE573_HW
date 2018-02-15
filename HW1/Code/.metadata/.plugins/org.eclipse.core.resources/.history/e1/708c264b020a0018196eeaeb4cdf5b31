@@ -1,0 +1,30 @@
+import random
+a = []
+
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+    global fileNew
+    root = tk.Tk()
+    root.withdraw()
+    fileNew = filedialog.askopenfilename()
+    return fileNew
+
+def genRandomArray():
+    #N = input("Please enter the size of the array")
+    N = 8
+    global a
+    for i in range(0, N-1):
+        num = round(100*random.random(), 2)
+        a.append(num)
+        
+    print(a)  
+
+def format(value):
+    return "%.3f" % value
+
+getFilePath()
+genRandomArray()
+
+formatted = [[format(v) for v in r] for r in m]
+fileNew.write(str(formatted))

@@ -1,0 +1,23 @@
+import random
+global N
+
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+    global fileNew
+    root = tk.Tk()
+    root.withdraw()
+    fileNew = filedialog.askopenfilename()
+    return fileNew
+
+def genRandomArray():
+    a = []
+    input(N)
+    for i in range(0, N-1):
+        a.append(round(100*random.random(), 2))
+    
+    print(a)  
+
+
+input ()
+

@@ -1,0 +1,7 @@
+import random
+a = []
+for x in range(10):
+    a.append(100*random.random())
+
+print(a)  
+input ()

@@ -1,0 +1,35 @@
+import numpy 
+
+# Code based on code from  https://www.geeksforgeeks.org/shellsort/
+# Python program for implementation of Shell Sort
+ 
+def shellSort(arr):
+ 
+    # Start with a big gap, then reduce the gap
+    n = len(arr)
+   
+    hArr = [3, 1]
+    hInd = 0
+   
+    for x in range(0, len(hArr)):
+        
+    
+    shellComp = 0
+    
+   
+ 
+ 
+# Driver code to test above
+arr = [ 12, 34, 54, 2, 3]
+
+print ("Array before sorting:")
+print(arr) 
+
+n = len(arr)
+shellSort(arr)
+
+ 
+print ("\nArray after sorting:")
+print(arr)
+ 
+# This code is contributed by Mohit Kumra

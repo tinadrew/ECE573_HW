@@ -1,0 +1,18 @@
+#Used to open the file dialog box.  Copied from:
+#https://stackoverflow.com/questions/9319317/quick-and-easy-file-dialog-in-python/14119223
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+    global filePath
+    root = tk.Tk()
+    root.withdraw()
+    filePath = filedialog.askopenfilename()
+    
+    path = os.path.dirname(getFilePath())
+    print(path)
+    
+    for file in os.listdir(path):
+        fNew =  os.path.join(path, file)
+            #https://stackoverflow.com/questions/3277503/how-do-i-read-a-file-line-by-line-into-a-list
+        if fNew.endswith(".txt"):
+            #print(fNew)

@@ -1,0 +1,26 @@
+import random
+
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+    global fileNew
+    root = tk.Tk()
+    root.withdraw()
+    fileNew = filedialog.askopenfilename()
+    return fileNew
+
+with open(fileNew) as f:
+    data1 = f.read().splitlines()
+    data = [int(x) for x in data1]
+    N = len(data)
+    #print(data)
+
+a = []
+for x in range(10):
+    a.append(round(100*random.random(), 2))
+
+print(a)  
+
+
+input ()
+

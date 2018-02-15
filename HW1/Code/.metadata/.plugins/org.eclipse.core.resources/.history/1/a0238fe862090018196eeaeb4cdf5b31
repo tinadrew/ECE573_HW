@@ -1,0 +1,7 @@
+array2 = []
+
+for i in range(0, 3):
+    global array2
+    array2.append(i)
+
+print(array2)

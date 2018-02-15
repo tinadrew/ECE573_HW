@@ -1,0 +1,27 @@
+import random
+
+
+#The code below opens and dialog box and allows the user to select a 
+#directory 
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+    import os
+
+    global filePath
+    global fileDirectory
+    root = tk.Tk()
+    root.withdraw()
+    filePath = filedialog.askopenfilenames(parent=root,title='Choose a file')
+    print(filePath)
+    
+    directory = os.path.split(filePath)[0]
+    print(directory)
+        
+    return filePath
+
+#The code below opens or creates a new files. 
+getFilePath()
+file = 'this.txt'
+#fNew =  os.path.join(filePath, file)
+#afile = open(fNew, "w+" )

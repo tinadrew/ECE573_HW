@@ -1,0 +1,13 @@
+myList = []
+
+myList = ['a', 'c']
+i = 0
+
+while i < 3:
+    testData = input()
+    myList
+    i += 1
+    myList.append('a', str(testData))
+    
+print(myList)
+    

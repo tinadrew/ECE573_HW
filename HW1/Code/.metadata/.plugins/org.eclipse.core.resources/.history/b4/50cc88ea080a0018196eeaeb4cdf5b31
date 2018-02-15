@@ -1,0 +1,11 @@
+a = 12.96
+b = str(a)
+print (b)
+
+
+items = {'item1': 'bill', 'item2': 'cows', 'item3': 'abcdef'}
+choice = input("Select your item: ")
+if choice in items:
+    the_choice = items[choice]
+else:
+    print("Uh oh, I don't know about that item")

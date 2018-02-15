@@ -1,0 +1,13 @@
+import random
+
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+    global fileNew
+    root = tk.Tk()
+    root.withdraw()
+    fileNew = filedialog.askdirectory
+    return fileNew
+
+getFilePath()
+afile = open(fileNew, "w" )

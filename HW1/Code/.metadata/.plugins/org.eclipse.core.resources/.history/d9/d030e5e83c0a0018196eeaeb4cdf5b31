@@ -1,0 +1,26 @@
+
+filePath = ""
+arr = []
+
+#Used to open the file dialog box.  Copied from:
+#https://stackoverflow.com/questions/9319317/quick-and-easy-file-dialog-in-python/14119223
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+    global filePath
+    root = tk.Tk()
+    root.withdraw()
+    filePath = filedialog.askopenfilename()
+    return filePath
+
+getFilePath()
+with open(filePath) as f:
+    data1 = f.read().splitlines()
+    #h = data1.split(" ")
+    data = [int(x) for x in data1]
+    for x in data1:
+       y = data[x].split
+    #N = len(data)
+    #print(data)
+    print(data1)
+    #print(h)

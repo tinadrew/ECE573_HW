@@ -1,0 +1,6 @@
+import random
+for x in range(10):
+    a = 100*random.random()
+
+print(a)  
+input ()

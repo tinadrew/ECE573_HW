@@ -1,0 +1,104 @@
+#Imports Library to use timing function
+import time
+
+#Sets global variables to default variables
+startProg = time.time()
+timeFarthest = 0
+timeProg = 0
+SumCount = 0
+OpCount = 0
+N = 0
+arrN = []
+arrNaive = []
+pair = []
+    
+#arr = [-10, 10, 1, 0, 20, 10, 25, 5, 30]
+#arrN = [] #X axis for inputs
+#arrNaive = []
+#arrNaive = []
+arrLog = []
+
+
+#Used to open the file dialog box.  Copied from:
+#https://stackoverflow.com/questions/9319317/quick-and-easy-file-dialog-in-python/14119223
+def getFilePath():
+    import tkinter as tk
+    from tkinter import filedialog
+    global filePath
+    root = tk.Tk()
+    root.withdraw()
+    filePath = filedialog.askopenfilename()
+    return filePath
+    
+#The function below provides a naive implementation 
+#of the three sum problem.  The code is based on 
+#Slide 34 for the fundamentals-1-s18 slides
+
+def FarthestSum(data):
+    startFarthest = time.time()
+    global SumCount
+    SumCount = 0
+    global OpCount
+    OpCount = 0 
+    global timeFathest
+    global timeProg
+    global pair
+    N = len(data)
+    data.sort()
+    pair = [data[0], data[N-1]]
+    
+    timeFarthest = time.time() - startFarthest
+    return SumCount, OpCount, timeFarthest
+    
+#ThreeSumNaive(data)
+#printData(data, OpCount, SumCount, timeProg, timeNaive, N)
+
+def runThreeSum():
+#Gets data from each file with a .txt extension in the directory
+#Part of the code is referenced from 
+#http://www.pitt.edu/~naraehan/python2/file_path_cwd.html
+    import os
+    global data
+    global arrN
+    global arrNaive
+    global arrBinSum
+    global N
+    
+    path = os.path.dirname(getFilePath())
+    print(path)
+    
+    for file in os.listdir(path):
+        fNew =  os.path.join(path, file)
+            #https://stackoverflow.com/questions/3277503/how-do-i-read-a-file-line-by-line-into-a-list
+        if fNew.endswith(".txt"):
+            #print(fNew)
+            with open(fNew) as f:
+                data1 = f.read().splitlines()
+                data = [float(x) for x in data1]
+                N = len(data)
+                #print(data)
+            print(N)
+            FarthestSum(data)
+            arrN.append(N)
+            arrNaive.append(round(timeFarthest, 2))
+            print(N,", ", round(timeFarthest, 2))   
+        
+runThreeSum()
+
+arrFarthestS = [arrNaive for _,arrNaive in sorted(zip(arrN,arrNaive))]
+#arrBinSumS = [arrBinSum for _,arrBinSum in sorted(zip(arrN,arrBinSum))]
+
+arrN.sort()
+
+
+print("Input values of N: ", arrN) 
+print ("Time of Farthest Implementation", arrFarthestS)
+#print ("Time of Bin Search Implementation", arrBinSumS)
+
+
+#import matplotlib.pyplot as plt
+#X = [590,540,740,130,810,300,320,230,470,620,770,250]
+#Y = [32,36,39,52,61,72,77,75,68,57,48,48]
+#plt.scatter(X,Y)
+
+input ()

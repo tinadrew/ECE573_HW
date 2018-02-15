@@ -1,0 +1,4 @@
+
+g = '2690 4649'
+z = g.split
+print(z)

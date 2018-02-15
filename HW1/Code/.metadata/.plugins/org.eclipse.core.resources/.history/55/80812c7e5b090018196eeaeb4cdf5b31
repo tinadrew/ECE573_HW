@@ -1,0 +1,17 @@
+def getData_File ():
+    import tkinter as tk
+    from tkinter import filedialog
+    global data
+    global N
+    root = tk.Tk()
+    root.withdraw()
+    fileName = filedialog.askopenfilename()
+    
+    #https://stackoverflow.com/questions/3277503/how-do-i-read-a-file-line-by-line-into-a-list
+    with open(fileName) as f:
+        data1 = f.read().splitlines()
+        data = [int(x) for x in data1]
+        N = len(data)
+        print("Data: ", data)
+    return data, N
+
