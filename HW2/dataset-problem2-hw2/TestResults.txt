@@ -1,0 +1,8 @@
+
+['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
+['data0.1024', 772414, 248638, 523776]
+['data0.2048', 3092725, 996597, 2096128]
+
+['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
+['data0.4096', 12377040, 3990480, 8386560]
+['data0.8192', 49520446, 15970110, 33550336]
