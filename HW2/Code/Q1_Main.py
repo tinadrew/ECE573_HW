@@ -18,6 +18,7 @@ class glVar():
     insCompPh = 0
     shellCompTot = 0
     myFile = ''
+    
 #The code below opens and dialog box and allows the user to select a 
 #directory 
 def getFilePath():
@@ -33,7 +34,7 @@ def getFilePath():
     glVar.myFile = open(os.path.join(glVar.directory, file), "a+" )
     
 # Python program for implementation of Shell Sort
- 
+#Based loosely on code from https://www.geeksforgeeks.org/shellsort/
 def shellSort(arr):
     # Start with a big gap, then reduce the gap
     glVar.shellCompPh = 0
@@ -49,12 +50,10 @@ def shellSort(arr):
             j = i+h
             #numSwaps = 0
             k = j
-            while k >= h:
+            while k >= h and arr[i] > arr[j]: 
                 #swaps elements recursively until we reach the end of the array    
-                if arr[i] > arr[j]: 
-                    #Swap the elements if the 
-                    arr[i], arr[j] = arr[j], arr[i]
-                    #print (arr)
+                arr[i], arr[j] = arr[j], arr[i]
+                #print (arr)
                 k -= h
                 j = i
                 i = k                   
@@ -102,6 +101,9 @@ def runShellSort():
 
 print(glVar.dataArr)
 runShellSort()
+print(glVar.myFile)
+input()
+
     
     
 
