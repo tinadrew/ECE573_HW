@@ -27,31 +27,51 @@ def getFilePath():
 
 #
 # Python program for implementation of Shell Sort
-#Based loosely on code from https://www.geeksforgeeks.org/shellsort/
-def shellSort(arr):
+
+
+#getFilePath()
+#write header information to file
+header = ['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
+#glVar.myFile.write('\n') 
+#glVar.myFile.write(str(header))
+#glVar.myFile.write('\n')
+#Code from https://www.geeks
     glVar.shellCompPh = 0
     glVar.insCompPh = 0
-        
-    N = len(arr)
 
-    #runs elements for length of hArr   
-    h = 1
-    for i in range(0, N-1):
-        j = i+1
-        #numSwaps = 0
-        k = j
-        while k >= 0 and arr[i] > arr[j]: 
-            #swaps elements recursively until we reach the end of the array    
-            arr[i], arr[j] = arr[j], arr[i]
-            #print (arr)
-                
-            k -= 1
-            j = i
-            i = k                   
-                                
-            #increments number of shellsort comparisions or insertions sort comparision
-          
+    N = len(arr)
+    
+    # Traverse through 1 to len(arr)
+    for i in range(1, N):
+        x, y, xRep,yRep = 0
+        y = arr[i]
+
+        #finds adjacent duplicates of first integar
+        while x == 0 and i < N:
+            if arr[i] ==  arr[i+1]:
+                xDup += 1
+            else x = arr[i]
+
+        j = i + xDup + 1
+
+        #finds aDJACENT duplicates of second integar        
+        while y == 0 and j < N:
+            if arr[j] ==  arr[y+1]:
+                yDup += 1
+            else y = arr[j]
+
+
+        # Move elements of arr[0..i-1], that are
+        # greater than key, to one position ahead
+        # of their current position
+        j = i-1
+        while j >=0 and y < arr[j] :
+            arr[j+1] = arr[j]
+            j -= 1
             glVar.insCompPh += 1
+        arr[j+1] = y
+
+        
 
         glVar.shellCompTot = glVar.shellCompPh + glVar.insCompPh
         print(glVar.shellCompTot)
@@ -61,34 +81,20 @@ def shellSort(arr):
     #sets data array to summary of elements
     glVar.dataSum.extend((glVar.currFile, glVar.shellCompTot, glVar.shellCompPh, glVar.insCompPh))
     
-    #glVar.myFile.write(str(glVar.dataSum))
-    #glVar.myFile.write('\n') 
-
-# Driver code to test above
-
-
-#getFilePath()
-#write header information to file
-header = ['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
-#glVar.myFile.write('\n') 
-#glVar.myFile.write(str(header))
-#glVar.myFile.write('\n') 
-        
 
 def runShellSort():
 
-    arr = [10, 3, 5, 1, 7, 3, 6, 2, 8]
+    arr = [10, 3, 5, 1, 7, 2, 2, 2, 3, 6, 2, 8]
+    arr2 = [2,2,2,2,1,1,3,3] 
     glVar.dataSum = []
     glVar.dataArr = arr
     print(arr)
 
-    shellSort(glVar.dataArr)
+    insertionSort(glVar.dataArr)
     #glVar.myFile.write(str(arr))
     #glVar.myFile.write(str(glVar.insCompPh))
 
 
 runShellSort()
 print(glVar.dataArr)
-print("HelloWORLD")
-    
-    
+input('Hit enter to exit')
