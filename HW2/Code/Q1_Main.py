@@ -70,9 +70,15 @@ def shellSort(arr):
     print("Number of comparision for insertion sort comparisons: ", glVar.insCompPh)
     #sets data array to summary of elements
     glVar.dataSum.extend((glVar.currFile, glVar.shellCompTot, glVar.shellCompPh, glVar.insCompPh))
-   
+
+    glVar.myFile.write('\n') 
+    glVar.myFile.write(str(header))
+    glVar.myFile.write('\n')           
     glVar.myFile.write(str(glVar.dataSum))
+    glVar.myFile.write('\nSorted array: \n')
+    glVar.myFile.write(str(arr))
     glVar.myFile.write('\n')
+    
     print(glVar.dataSum)
 
 # Driver code to test above
@@ -81,10 +87,7 @@ arr = [10, 3, 5, 1, 7, 3, 6, 2, 8]
 getFilePath()
 #write header information to file
 header = ['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
-glVar.myFile.write('\n') 
-glVar.myFile.write(str(header))
-glVar.myFile.write('\n') 
-        
+
 
 def runShellSort():
 
