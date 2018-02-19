@@ -73,7 +73,7 @@ def shellSort(arr):
    
     glVar.myFile.write(str(glVar.dataSum))
     glVar.myFile.write('\n')
-    print('yes')
+    print(glVar.dataSum)
 
 # Driver code to test above
 arr = [10, 3, 5, 1, 7, 3, 6, 2, 8]
@@ -102,8 +102,9 @@ def runShellSort():
 
 print(glVar.dataArr)
 runShellSort()
+print('After you exit the program, data can be reviewed in the data file here: ')
 print(glVar.myFile)
-input()
+input('Press enter to exit. \n')
 
     
     
