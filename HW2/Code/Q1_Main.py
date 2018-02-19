@@ -13,6 +13,7 @@ class glVar():
     currFile = ''
     dataArr = []
     dataSum = []
+    dataSorted = []
     directory = ""
     shellCompPh = 0
     insCompPh = 0
@@ -37,9 +38,8 @@ def getFilePath():
 #Based loosely on code from https://www.geeksforgeeks.org/shellsort/
 def shellSort(arr):
     # Start with a big gap, then reduce the gap
-    glVar.shellCompPh = 0
-    glVar.insCompPh = 0
-        
+    glVar.shellCompPh = glVar.insCompPh = 0
+            
     N = len(arr)
     #Sets parameters for H or increments sequence
     hArr = [7, 3, 1]
@@ -47,62 +47,70 @@ def shellSort(arr):
     for h in hArr:    
         #Compares elements to the end of the array
         for i in range(0, N-h):
-            j = i+h
             #numSwaps = 0
-            k = j
-            while k >= h and arr[i] > arr[j]: 
-                #swaps elements recursively until we reach the end of the array    
-                arr[i], arr[j] = arr[j], arr[i]
-                #print (arr)
-                k -= h
-                j = i
-                i = k                   
-                                    
+            while i >= 0: 
                 #increments number of shellsort comparisions or insertions sort comparision
                 if h  == 1: 
                     glVar.insCompPh += 1
                 else:
                     glVar.shellCompPh += 1
+                if arr[i] > arr[i+h]: 
+                    #swaps elements recursively until we reach the end of the array    
+                    arr[i], arr[i+h] = arr[i+h], arr[i]
+                    #print (arr)
+                    i -= h
+                else:
+                    break   
             glVar.shellCompTot = glVar.shellCompPh + glVar.insCompPh
             print(glVar.shellCompTot)
-                    
+            glVar.dataSorted = arr
+    
+    #arr, glVar.insCompPh =  insertionSort(arr)           
+            
+    glVar.shellCompTot = glVar.shellCompPh + glVar.insCompPh
+    print(glVar.shellCompTot)
+            
+    print(arr)               
     print("\nNumber of comparision for shell sort comparisons: ", glVar.shellCompPh)    
     print("Number of comparision for insertion sort comparisons: ", glVar.insCompPh)
     #sets data array to summary of elements
     glVar.dataSum.extend((glVar.currFile, glVar.shellCompTot, glVar.shellCompPh, glVar.insCompPh))
 
+
+    print(glVar.dataSum)
+
+
+def writeDataFile():
+    #write header information to file
+    header = ['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
     glVar.myFile.write('\n') 
     glVar.myFile.write(str(header))
     glVar.myFile.write('\n')           
     glVar.myFile.write(str(glVar.dataSum))
     glVar.myFile.write('\nSorted array: \n')
-    glVar.myFile.write(str(arr))
+    glVar.myFile.write(str(glVar.dataSorted))
     glVar.myFile.write('\n')
     
-    print(glVar.dataSum)
 
-# Driver code to test above
-arr = [10, 3, 5, 1, 7, 3, 6, 2, 8]
-
-getFilePath()
-#write header information to file
-header = ['Datafile', 'TotShellComp', 'ShellPhaseComp', 'InsPhaseComp']
-
-
-def runShellSort():
-
-    
+def runShellSort():  
     for f in glVar.dataFiles:
         glVar.dataSum = []
         glVar.currFile = os.path.basename(f)
         with open(f) as fi:
-            glVar.dataArr = fi.read().splitlines()
-            #data = [int(x) for x in data1]
+            data1 = fi.read().splitlines()
+            glVar.dataArr = [int(x) for x in data1]
                 #print(data)
+        print(glVar.dataArr)
         shellSort(glVar.dataArr)
-    #glVar.myFile.write(str(arr))
-    #glVar.myFile.write(str(glVar.insCompPh))
+        writeDataFile()
 
+
+# Driver arrays code to test above
+a = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+c = [10, 5, 9, 6, 13, 3, 1, 2, 18]
+
+getFilePath()
 print(glVar.dataArr)
 runShellSort()
 print('After you exit the program, data can be reviewed in the data file here: ')
