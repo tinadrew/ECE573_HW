@@ -7,7 +7,7 @@ algorithm on them
 """
 import os
 import math
-from test.test_traceback import boundaries
+
 arr = []
 
 arr2 = [1, 20, 30]
@@ -61,6 +61,7 @@ def mergeSortBottomUp(arr):
             a.extend(sub)
             #print(a)
             i = j
+            
            
             #sorts additional p that are left offver
             #if j > len(arr):
@@ -70,12 +71,12 @@ def mergeSortBottomUp(arr):
             glVar.numComp += Comp1
         x += 1
         arr = a
+                
+        print("Number of comparision for insertion sort comparisons: ", glVar.numComp)
     
-    glVar.numComp += Comp2
     glVar.dataSorted = arr
 
-    print(arr)               
-    print("Number of comparision for insertion sort comparisons: ", glVar.numComp)
+
     #sets data array to summary of elements
     glVar.dataSum.extend((glVar.currFile, glVar.numComp))
    
@@ -122,12 +123,14 @@ def runMergeSortBot():
             data1 = fi.read().splitlines()
             glVar.dataArr = [int(x) for x in data1]
                 #print(data)
-        print(glVar.dataArr)
+        #print(glVar.dataArr)
         mergeSortBottomUp(glVar.dataArr)
         writeDataFile()
 
 
 getFilePath()
+outputArray = input('Would you like to output the array to the screen?  Enter "Y" for yes and "N" for no: \n')
+
 #print(glVar.dataArr)
 runMergeSortBot()
 print('After you exit the program, data can be reviewed in the data file here: ')

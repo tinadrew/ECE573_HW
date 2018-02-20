@@ -44,7 +44,8 @@ This code was provided by:
 http://interactivepython.org/runestone/static/pythonds/SortSearch/TheMergeSort.html
 """
 def mergeSortTopDown(alist):
-    print("Splitting ",alist)
+    #if outputArray == "Y" or outputArray == "y":
+        #print("Splitting ",alist)
     if len(alist)>1:
         
         mid = len(alist)//2
@@ -78,15 +79,19 @@ def mergeSortTopDown(alist):
             j=j+1
             k=k+1
             
-    print(glVar.numComp)
-    print("Merging ",alist)
+        #print(glVar.numComp)
+        if outputArray == "Y" or outputArray == "y":
+            print("Merging ",alist)
+        
+        print("Total Number of comparisons: ", glVar.numComp)
+
+    #sets data array to summary of elements
+   
 
     glVar.dataSorted = alist
 
     #print(alist)               
-    print("Number of comparision for insertion sort comparisons: ", glVar.numComp)
-    #sets data array to summary of elements
-   
+
     return arr, glVar.numComp
 
 def writeDataFile():
@@ -109,13 +114,15 @@ def runMergeSortBot():
             data1 = fi.read().splitlines()
             glVar.dataArr = [int(x) for x in data1]
                 #print(data)
-        print(glVar.dataArr)
+        #print(glVar.dataArr)
         mergeSortTopDown(glVar.dataArr)
         glVar.dataSum.extend((glVar.currFile, glVar.numComp))
         writeDataFile()
 
 
 getFilePath()
+outputArray = input('Would you like to output the array to the screen?  Enter "Y" for yes and "N" for no: \n')
+
 #print(glVar.dataArr)
 runMergeSortBot()
 print('After you exit the program, data can be reviewed in the data file here: ')
