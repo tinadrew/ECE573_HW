@@ -6,10 +6,7 @@ It generates an array of values and then runs a sorting
 algorithm on them
 """
 import os
-import math
-
 arr = []
-
 arr2 = [1, 20, 30]
 arr3 = [4, 5, 6]
 
@@ -39,69 +36,63 @@ def getFilePath():
     glVar.dataFiles = filedialog.askopenfilenames(parent=root,title='Select files to be tested')
     glVar.directory = os.path.dirname(glVar.dataFiles[0])
     
-    file = 'TestResults_Q4_MergeSort_BottomUp.txt'
+    file = 'TestResults_Q4_MergeSort_TopDown.txt'
     glVar.myFile = open(os.path.join(glVar.directory, file), "a+" )
 
-def mergeSortBottomUp(arr):
-    Comp1 = Comp2 = Comp3 = sz =  0
-    x = 1
-    #divides array in or subarrays    
-    while sz < int(len(arr)/2+1):
-        #increases size by powers of 2
-        sz  = 2**x 
-        #Sort subarry of size sz
-        i = j = 0
-        #creates temporary empty array
-        a = []
-        #breaks up the array 
-        for y in range (math.ceil((len(arr)/sz))):
-            j += sz
-            sub, Comp1 = mergeS(arr[i:j])
-            #adds sorted subarry to temporary array
-            a.extend(sub)
-            #print(a)
-            i = j
-            
-           
-            #sorts additional p that are left offver
-            #if j > len(arr):
-                #sub, Comp2 = holdSort(arr[i-sz:])
-                #del a[i-sz-1:]
-                #a.extend(sub)
-            glVar.numComp += Comp1
-        x += 1
-        arr = a
-                
-        print("Number of comparision for comparisons: ", glVar.numComp)
-    
-    glVar.dataSorted = arr
+"""
+This code was provided by:  
+http://interactivepython.org/runestone/static/pythonds/SortSearch/TheMergeSort.html
+"""
+def mergeSortTopDown(alist):
+    #if outputArray == "Y" or outputArray == "y":
+        #print("Splitting ",alist)
+    if len(alist)>1:
+        
+        mid = len(alist)//2
+        lefthalf = alist[:mid]
+        righthalf = alist[mid:]
 
+        mergeSortTopDown(lefthalf)
+        mergeSortTopDown(righthalf)
+
+        i=0
+        j=0
+        k=0
+        
+        while i < len(lefthalf) and j < len(righthalf):
+            glVar.numComp += 1 
+            if lefthalf[i] < righthalf[j]:
+                alist[k]=lefthalf[i]
+                i=i+1
+            else:
+                alist[k]=righthalf[j]
+                j=j+1
+            k=k+1
+
+        while i < len(lefthalf):
+            alist[k]=lefthalf[i]
+            i=i+1
+            k=k+1
+
+        while j < len(righthalf):
+            alist[k]=righthalf[j]
+            j=j+1
+            k=k+1
+            
+        #print(glVar.numComp)
+        if outputArray == "Y" or outputArray == "y":
+            print("Merging ",alist)
+        
+        print("Total Number of comparisons: ", glVar.numComp)
 
     #sets data array to summary of elements
-    glVar.dataSum.extend((glVar.currFile, glVar.numComp))
    
-    return arr, glVar.numComp
 
-def mergeS(a):
-    arr= []
-    numComp = 0
-    
-    L = a[:int(len(a)/2)]
-    #print(L)
-    R = a[int(len(a)/2):]
-    
-    while len(L) > 0 and len(R) > 0:
-        if R[0] > L[0]:
-            arr.append(L.pop(0))
-        else:
-            arr.append(R.pop(0))
-        numComp += 1
-        #print(arr)
-    #adds the rest of the array to the test array 
-    
-    arr = arr + L + R
-        
-    return arr, numComp
+    glVar.dataSorted = alist
+
+    #print(alist)               
+
+    return arr, glVar.numComp
 
 def writeDataFile():
     #write header information to file
@@ -124,7 +115,8 @@ def runMergeSortBot():
             glVar.dataArr = [int(x) for x in data1]
                 #print(data)
         #print(glVar.dataArr)
-        mergeSortBottomUp(glVar.dataArr)
+        mergeSortTopDown(glVar.dataArr)
+        glVar.dataSum.extend((glVar.currFile, glVar.numComp))
         writeDataFile()
 
 
@@ -136,6 +128,7 @@ runMergeSortBot()
 print('After you exit the program, data can be reviewed in the data file here: ')
 print(glVar.myFile)
 input('Press enter to exit. \n')
+
 
 
 

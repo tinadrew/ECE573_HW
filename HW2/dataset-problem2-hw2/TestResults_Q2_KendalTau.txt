@@ -1,0 +1,20 @@
+
+['Datafile', 'NumComp', 'Distance']
+[]
+Sorted array: 
+[]
+
+['Datafile', 'NumComp', 'Distance']
+[]
+Sorted array: 
+[]
+
+['Datafile', 'NumComp', 'Distance']
+[]
+Sorted array: 
+[]
+
+['Datafile', 'NumComp', 'Distance']
+[]
+Sorted array: 
+[]

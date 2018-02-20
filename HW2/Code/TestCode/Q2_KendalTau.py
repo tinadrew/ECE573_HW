@@ -27,6 +27,7 @@ class glVar():
     myFile = ''
     directory = myFile = ''
     numComp = 0
+    numInv = 0
    
 #The code below opens and dialog box and allows the user to select a 
 #directory 
@@ -39,7 +40,7 @@ def getFilePath():
     glVar.dataFiles = filedialog.askopenfilenames(parent=root,title='Select files to be tested')
     glVar.directory = os.path.dirname(glVar.dataFiles[0])
     
-    file = 'TestResults_Q4_MergeSort_BottomUp.txt'
+    file = 'TestResults_Q2_KendalTau.txt'
     glVar.myFile = open(os.path.join(glVar.directory, file), "a+" )
 
 def mergeSortBottomUp(arr):
@@ -73,12 +74,13 @@ def mergeSortBottomUp(arr):
         arr = a
                 
         print("Number of comparision for comparisons: ", glVar.numComp)
+        print("Kendal Tau Distance: ", glVar.numInv)
     
     glVar.dataSorted = arr
 
 
     #sets data array to summary of elements
-    glVar.dataSum.extend((glVar.currFile, glVar.numComp))
+    glVar.dataSum.extend((glVar.currFile, glVar.numComp, glVar.numInv))
    
     return arr, glVar.numComp
 
@@ -93,6 +95,7 @@ def mergeS(a):
     while len(L) > 0 and len(R) > 0:
         if R[0] > L[0]:
             arr.append(L.pop(0))
+            glVar.numInv += 1
         else:
             arr.append(R.pop(0))
         numComp += 1
@@ -105,7 +108,7 @@ def mergeS(a):
 
 def writeDataFile():
     #write header information to file
-    header = ['Datafile', 'NumComp']
+    header = ['Datafile', 'NumComp', 'Distance']
     glVar.myFile.write('\n') 
     glVar.myFile.write(str(header))
     glVar.myFile.write('\n')           
@@ -136,6 +139,4 @@ runMergeSortBot()
 print('After you exit the program, data can be reviewed in the data file here: ')
 print(glVar.myFile)
 input('Press enter to exit. \n')
-
-
 
