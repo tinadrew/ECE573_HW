@@ -31,7 +31,7 @@ def getFilePath():
     glVar.dataFiles = filedialog.askopenfilenames(parent=root,title='Select files to be tested')
     glVar.directory = os.path.dirname(glVar.dataFiles[0])
     
-    file = 'TestResults.txt'
+    file = 'TestResults_Q1_ShellSort.txt'
     glVar.myFile = open(os.path.join(glVar.directory, file), "a+" )
     
 # Python program for implementation of Shell Sort
@@ -47,23 +47,27 @@ def shellSort(arr):
     for h in hArr:    
         #Compares elements to the end of the array
         for i in range(0, N-h):
-            #numSwaps = 0
+            comp = 1
             while i >= 0: 
                 #increments number of shellsort comparisions or insertions sort comparision
                 if h  == 1: 
-                    glVar.insCompPh += 1
+                    glVar.insCompPh += comp
                 else:
-                    glVar.shellCompPh += 1
+                    glVar.shellCompPh += comp
+                    
                 if arr[i] > arr[i+h]: 
                     #swaps elements recursively until we reach the end of the array    
                     arr[i], arr[i+h] = arr[i+h], arr[i]
                     #print (arr)
                     i -= h
                 else:
-                    break   
-            glVar.shellCompTot = glVar.shellCompPh + glVar.insCompPh
-            print(glVar.shellCompTot)
-            glVar.dataSorted = arr
+                    break
+
+            print(comp)
+                
+    glVar.shellCompTot = glVar.shellCompPh + glVar.insCompPh
+    print(glVar.shellCompTot)
+    glVar.dataSorted = arr
     
     #arr, glVar.insCompPh =  insertionSort(arr)           
             

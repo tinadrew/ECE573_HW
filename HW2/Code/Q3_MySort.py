@@ -10,18 +10,24 @@ import os
 class glVar():
     arr = []
     directory = myFile = ''
-     
+    numComp = 0
+    sortedArr = []
 
+
+#The code below opens and dialog box and allows the user to select a 
+#directory 
 def getFilePath():
     import tkinter as tk
     from tkinter import filedialog
 
     root = tk.Tk()
     root.withdraw()
-    glVar.directory = filedialog.askdirectory()
-        
-    file = 'TestResults.txt'
-    glVar.myFile = open(os.path.join(glVar.directory, file), "a+" )
+    glVar.dataFiles = filedialog.askopenfilenames(parent=root,title='Select files to be tested')
+    glVar.directory = os.path.dirname(glVar.dataFiles[0])
+    
+    file = 'TestResults_Q3_MySort.txt'
+    glVar.myFile = open(os.path.join(glVar.directory, file), "a+" ) 
+
 
 
 #Generates Array of duplicating numbers as designated by
@@ -46,6 +52,7 @@ def holdSortDup(arr):
         #Finds proper insertion point for current element item under test
         while j > 0 and arr[i] < arr[j]:
             j -= 1
+            glVar.numComp += 1  
 
         if j != i-1:
             #Determines if there are adjacent duplicates
@@ -58,7 +65,9 @@ def holdSortDup(arr):
             #Removes subarray  from current position
             del arr[i:i+iDup+1]
             #Inserts subarray at proper index
-            arr[j+1:j+1] = a                 
+            arr[j+1:j+1] = a
+        else:
+            glVar.numComp += 1                 
         #print (arr)
         i = i + iDup+1
         it += 1
@@ -85,14 +94,18 @@ def findDup(index, arr, searchType):
 getFilePath()
 genArray()
 glVar.myFile.write('\n') 
-glVar.myFile.write('Original File Arr: ')
+glVar.myFile.write('Original File Arr: \n')
 glVar.myFile.write(str(glVar.arr))
+glVar.myFile.write('\n') 
 
 print(glVar.arr)
 holdSortDup(glVar.arr)
 print(glVar.arr)
 glVar.myFile.write('\n') 
-glVar.myFile.write('Sorted File Arr: ')
+glVar.myFile.write('Number of Comparisons: ')
+glVar.myFile.write(str(glVar.numComp))
+glVar.myFile.write('\n') 
+glVar.myFile.write('Sorted File Arr: \n')
 glVar.myFile.write(str(glVar.arr))
 
 input("Press enter to exit")

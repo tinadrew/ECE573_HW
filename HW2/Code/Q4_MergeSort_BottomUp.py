@@ -14,49 +14,33 @@ arr2 = [1, 20, 30]
 arr3 = [4, 5, 6]
 
 class glVar():
-    arr = [16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    #arr = [16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    dataFiles = ''
+    currFile = ''
+    dataArr = []
+    dataSum = []
+    dataSorted = []
+    directory = ""
+    shellCompPh = 0
+    insCompPh = 0
+    shellCompTot = 0
+    myFile = ''
     directory = myFile = ''
     numComp = 0
-     
-
+   
+#The code below opens and dialog box and allows the user to select a 
+#directory 
 def getFilePath():
     import tkinter as tk
     from tkinter import filedialog
 
     root = tk.Tk()
     root.withdraw()
-    glVar.directory = filedialog.askdirectory()
-        
-    file = 'TestResults.txt'
+    glVar.dataFiles = filedialog.askopenfilenames(parent=root,title='Select files to be tested')
+    glVar.directory = os.path.dirname(glVar.dataFiles[0])
+    
+    file = 'TestResults_Q4_MergeSort_BottomUp.txt'
     glVar.myFile = open(os.path.join(glVar.directory, file), "a+" )
-
-
-def mergeSortStand(arr):
-    numComp = 0
-            
-    #splits main array into two subarrays
-    mid = int(len(arr)/2)
-    arrL = arr[0:mid]
-    arrR = arr[mid:len(arr)]
-    
-    #sorts right and left subarrays
-    arrL, Comp1 = holdSort(arrL)
-    arrR, Comp2 = holdSort(arrR)
-          
-    #sorts merged subarrays
-    arr, Comp3 = mergeS(arrL, arrR)
-    numComp = Comp1+Comp2+Comp3
-    
-    print(Comp1)
-    print(Comp2)
-    #print(arr)
-    #print(numComp)
-    
-    return arr, numComp
-    
-
-#holdSort(arr)
-#mergeSortStand(arr)
 
 def mergeSortBottomUp(arr):
     Comp1 = Comp2 = Comp3 = sz =  0
@@ -88,6 +72,12 @@ def mergeSortBottomUp(arr):
         arr = a
     
     glVar.numComp += Comp2
+    glVar.dataSorted = arr
+
+    print(arr)               
+    print("Number of comparision for insertion sort comparisons: ", glVar.numComp)
+    #sets data array to summary of elements
+    glVar.dataSum.extend((glVar.currFile, glVar.numComp))
    
     return arr, glVar.numComp
 
@@ -112,11 +102,37 @@ def mergeS(a):
         
     return arr, numComp
 
-C = [1, 7, 2, 4]
-#y, z = mergeS(C)
-glVar.arr, z = mergeSortBottomUp(glVar.arr)
-print(z) 
-print(glVar.arr)
-input("Press enter to exit")
+def writeDataFile():
+    #write header information to file
+    header = ['Datafile', 'NumComp']
+    glVar.myFile.write('\n') 
+    glVar.myFile.write(str(header))
+    glVar.myFile.write('\n')           
+    glVar.myFile.write(str(glVar.dataSum))
+    glVar.myFile.write('\nSorted array: \n')
+    glVar.myFile.write(str(glVar.dataSorted))
+    glVar.myFile.write('\n')
+    
+
+def runMergeSortBot():  
+    for f in glVar.dataFiles:
+        glVar.dataSum = []
+        glVar.currFile = os.path.basename(f)
+        with open(f) as fi:
+            data1 = fi.read().splitlines()
+            glVar.dataArr = [int(x) for x in data1]
+                #print(data)
+        print(glVar.dataArr)
+        mergeSortBottomUp(glVar.dataArr)
+        writeDataFile()
+
+
+getFilePath()
+#print(glVar.dataArr)
+runMergeSortBot()
+print('After you exit the program, data can be reviewed in the data file here: ')
+print(glVar.myFile)
+input('Press enter to exit. \n')
+
 
 
